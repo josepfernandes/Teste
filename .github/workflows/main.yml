@@ -1,0 +1,33 @@
+            - name: Checkmarx AST Github Action
+  # You may pin to the exact commit or the version.
+  # uses: Checkmarx/ast-github-action@749fec53e0db0f6404a97e2e0807c3e80e3583a7
+  uses: Checkmarx/ast-github-action@2.0.23
+  with:
+    # Provide the AST portal URL
+    base_uri: eu.ast.checkmarx.net
+    # Provide the Tenant for AST portal URL
+    cx_tenant: cx_seg
+    # Client ID for AST portal authentication
+    cx_client_id: 9bb56f77-cd4b-4c90-b631-1e2fcbd69a7a
+    # Secret key for AST portal authentication
+    cx_client_secret: eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJlY2RkYmY4OS01MGNhLTQ2ZjMtYjIzMC02NjVlYWU5NWYzZTkifQ.eyJpYXQiOjE3Mzc0NjIzMTcsImp0aSI6IjM0MDVkMDJiLTQ2YTQtNDAxMS1iNzI0LThkNmQ2ZjY4MDQzYiIsImlzcyI6Imh0dHBzOi8vZXUuaWFtLmNoZWNrbWFyeC5uZXQvYXV0aC9yZWFsbXMvY3hfc2VnIiwiYXVkIjoiaHR0cHM6Ly9ldS5pYW0uY2hlY2ttYXJ4Lm5ldC9hdXRoL3JlYWxtcy9jeF9zZWciLCJ0eXAiOiJPZmZsaW5lIiwiYXpwIjoiYXN0LWFwcCIsInNpZCI6IjliYjU2Zjc3LWNkNGItNGM5MC1iNjMxLTFlMmZjYmQ2OWE3YSIsInNjb3BlIjoib2ZmbGluZV9hY2Nlc3MifQ.68sToxUJgcmZaploSjD8Ue311u39QSh6jEwkPaQ1WoOC-IFtUuSwwPF7B29mdT8IWcdERBRMSuOSj-8vCzK7ng
+    # Select a Checkmarx Project Name
+    project_name: Jota_SCA
+    # Branch name
+    branch: main
+    # GitHub API Token
+    github_token: 
+    # Additional parameters for AST scan
+    additional_params: --report-format sarif --output-path ..
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v2
+      with: 
+        # Path to SARIF file relative to the root of the repository
+        sarif_file: cx_result.sarif
+    # Repository name for PR decoration
+    repo_name: # optional, default is ${{ github.event.repository.name }}
+    # Organization name to create the Pr comment
+    namespace: # optional, default is ${{ github.repository_owner }}
+    # Pr Number of the pull request that needs the decoration
+    pr_number: # optional, default is ${{ github.event.number }}
+          
